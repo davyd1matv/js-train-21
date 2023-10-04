@@ -30,8 +30,14 @@
 class Musician {
   // статичне поле count, яке відслідковує кількість музикантів, початкове значення 0
   // Об'являємо приватні поля #name; #instrument;
+  count = 0;
+  #name;
+  #instrument;
 
   constructor(name, instrument) {
+    this.#name = name;
+    this.#instrument = instrument;
+    count++;
     // Конструктор приймає два параметри: name та instrument
     // присвоєння вхідного значення name до приватного поля #name
     // присвоєння вхідного значення instrument до приватного поля #instrument
@@ -39,26 +45,31 @@ class Musician {
   }
 
   get name() {
+    return this.#name;
     // гетер для приватного поля #name
     // повертає значення приватного поля #name
   }
 
   get instrument() {
+    return this.#instrument;
     // гетер для приватного поля #instrument
     // повертає значення приватного поля #instrument
   }
 
   set name(newName) {
+    this.#name = newName;
     // сетер для приватного поля #name
     // присвоює нове значення приватному полю #name
   }
 
   set instrument(newInstrument) {
+    this.#instrument = newInstrument;
     // сетер для приватного поля #instrument
     // присвоює нове значення приватному полю #instrument
   }
 
   play() {
+    console.log(`{this.#name} грає на ${this.#instrument}`);
     // метод, що виводить рядок в консоль <#name> грає на <#instrument>
   }
 }
@@ -98,6 +109,30 @@ class Musician {
  */
 
 class Guitarist extends Musician {
+  #band;
+
+  constructor(name, instrument, band) {
+    super(name, instrument);
+    this.#band = band;
+  }
+
+  get band() {
+    return this.#band;
+  }
+
+  set band(newBand) {
+    this.#band = newBand;
+  }
+
+  play() {
+    this.#band = band;
+  }
+
+  play() {
+    console.log(
+      `${super.name} грає на ${super.instrument} в групі ${this.#band}`
+    );
+  }
   // Об'являємо приватні поля #band;
   // Конструктор приймає три параметри: name, instrument та band
   // виклик конструктора батьківського класу super з двома параметрами name, instrument
@@ -145,6 +180,29 @@ class Guitarist extends Musician {
  */
 
 class Bassist extends Musician {
+  #band;
+  constructor(name, instrument, band) {
+    SourceBuffer(name, instrument);
+    this.#band = band;
+  }
+
+  get band() {
+    return this.#band;
+  }
+
+  set band(newBand1) {
+    this.#band = newBand1;
+  }
+
+  joinBand() {
+    this.#band = band;
+  }
+
+  play() {
+    console.log(
+      `${super.name} грає на ${super.instrument} в групі ${this.#band}`
+    );
+  }
   // Об'являємо приватні поля  #band;
   // Конструктор приймає три параметри: name, instrument та band
   // виклик конструктора батьківського класу super з двома параметрами name, instrument
@@ -156,6 +214,12 @@ class Bassist extends Musician {
   // метод joinBand, що змінює значення #band,this.#band = band
   // перевизначений метод play(), що виводить рядок в консоль ${super.name} грає на ${super.instrument} в групі ${this.#band}
 }
+
+Object.defineProperty(Musician.prototype, "band", {
+  set(newBand) {
+    this.band = newBand;
+  },
+});
 
 // Тут ми використовуємо Object.defineProperty(), щоб додати сетер band до класу Musician після його створення.
 // Перший аргумент - це об'єкт, до якого ми хочемо додати властивість. У цьому випадку це Musician.prototype,
@@ -174,7 +238,26 @@ class Bassist extends Musician {
  */
 
 class Band {
+  #name;
+  #members;
   // Об'являємо приватні поля #name; #members;
+  // constructor(#name,#members) {
+
+  // }
+
+  get name() {
+    return this.#name;
+  }
+
+  get memners() {
+    return this.#members;
+  }
+
+  //   set name(newName1) {
+  //     this.#name = newName1;
+  //   }
+
+  // addmember(){}
   /*
    * Створюємо конструктор з двома вхідними параметрами: #name і #members
    * #members - це масив об'єктів, що є екземплярами класу Musician або його нащадків
@@ -200,6 +283,11 @@ class Band {
  * | date        |  Date      |
  */
 class Performance {
+  #band;
+  #location;
+	#date;
+	
+	constructor(#band,#location,#date){}
   // Об'являємо приватні поля #band; #location; #date;
   // Створюємо конструктор з трьома вхідними параметрами: #band, #location та #date
   // Створюємо getter для #band, що повертає приватну властивість #band
